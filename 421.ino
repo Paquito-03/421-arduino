@@ -1,6 +1,7 @@
 #include <SevSeg.h>
 SevSeg sevseg; 
 
+<<<<<<< HEAD
 // digitCodeMap indicate which segments must be illuminated to display
 // each number. FROM SevSeg.cpp
 static const uint8_t digitCodeMap[] = {
@@ -27,6 +28,8 @@ static const uint8_t digitCodeMap[] = {
   0b01001001, // 19  '---'     THIRD THROW
 };
 
+=======
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
 // Hit sensor
 int sensor = A4; // define the tilt switch sensor interfaces
 int val ;// define numeric variables val
@@ -35,8 +38,15 @@ int val ;// define numeric variables val
 const int boutonPins[] = {A0, A1, A2, A3};
 
 // variable for the game
+<<<<<<< HEAD
 byte digits[] = {0, 0, 0};
 byte nbThrow = 0;
+=======
+int diceRoll = 0;
+byte digit1 = 0;
+byte digit2 = 0;
+byte digit3 = 0;
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
 
 // block the digit
 bool blockDigit1 = false;
@@ -73,16 +83,26 @@ void setup() {
 void loop() {
   val = digitalRead (sensor) ; // read hit sensor
 
+<<<<<<< HEAD
   if (val == LOW && nbThrow < 3) // if the tilt sensor detects a signal 
+=======
+  if (val == LOW) // if the tilt sensor detects a signal
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
   {
     if (!blockDigit1)
       digits[0] = random(1,6);
     if (!blockDigit2)
       digits[1] = random(1,6);
     if (!blockDigit3)
+<<<<<<< HEAD
       digits[2] = random(1,6);
     delay(200);
     nbThrow++;
+=======
+      digit3 = random(1,6);
+
+    diceRoll = (digit1 * 100) + (digit2 * 10) + digit3;
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
   }
 
 
@@ -99,16 +119,25 @@ void loop() {
   if (digitalRead(boutonPins[3]) == HIGH)
     unlockAllDigit();
 
+<<<<<<< HEAD
   // For more details, see the documentation of SevSeG.h
   // Set the segments for every digit on the display
   uint8_t segs[4] = {digitCodeMap[16 + nbThrow], digitCodeMap[digits[0]], digitCodeMap[digits[1]], digitCodeMap[digits[2]]};
   sevseg.setSegments(segs);
 
+=======
+  // For more details, see the documentation of sevgev.h
+  sevseg.setNumber(diceRoll, 0); // 
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
   sevseg.refreshDisplay(); 
 }
 
 /**
+<<<<<<< HEAD
  * Unlocks all digit changes after dice are rolled and set nbThrow to 0.
+=======
+ * Unlocks all digit changes after dice are rolled.
+>>>>>>> 76f49c6e4fa11676e9eaf8a78455aa73b162d952
  *
  * This function resets the flags that prevent changing the digits
  * after the dice are rolled. This allows the digits to be changed
