@@ -14,7 +14,17 @@ int digit1 = 0;
 int digit2 = 0;
 int digit3 = 0;
 
+// block digit
+bool blockDigit1 = false;
+bool blockDigit2 = false;
+bool blockDigit3 = false;
+
 void setup() {
+
+  // DEBUG
+  pinMode(13, OUTPUT);
+  digit2 = 4;
+  blockDigit2 = true;
   
   //set all segments & digits as outputs
 
@@ -43,13 +53,52 @@ void loop() {
 
   if (val == HIGH) //When the tilt sensor detects a signal when the switch, LED flashes
   {
-    digit1 = random(1,6);
-    digit2 = random(1,6);
-    digit3 = random(1,6);
+    if (!blockDigit1)
+      digit1 = random(1,6);
+    if (!blockDigit2)
+      digit2 = random(1,6);
+    if (!blockDigit3)
+      digit3 = random(1,6);
+
+
     diceRoll = (digit1 * 100) + (digit2 * 10) + digit3;
   }
+
+  if (digitalRead(boutonPins[0]) == HIGH)
+  {
+      blockDigit1 = true;
+      digitalWrite(13, HIGH); 
+  }
+      
+  if (digitalRead(boutonPins[1]) == HIGH)
+  {
+    blockDigit2 = true;
+      digitalWrite(13, HIGH);
+  }
+      
+  if (digitalRead(boutonPins[2]) == HIGH)
+  {
+      blockDigit3 = true;
+      digitalWrite(13, HIGH);
+  }
+      
+
+  if (digitalRead(boutonPins[3]) == HIGH)
+  {
+    unlockAllDigit();
+    digitalWrite(13, HIGH);
+  }
+      
+
+
   sevseg.setNumber(diceRoll, 0);
   sevseg.refreshDisplay();
+}
 
+void unlockAllDigit()
+{
+  blockDigit1 = false;
+  blockDigit2 = false;
+  blockDigit3 = false;
 }
 
