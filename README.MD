@@ -1,5 +1,3 @@
-# 421
+# Dice roll
 
-421 is a popular game that is played at the counter of many bars.
-
-# Diagram
+It is a simple version that just allows you to make a roll of three dice that is displayed on the segment when you shake the sensor
