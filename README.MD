@@ -5,7 +5,7 @@
 # Diagram
 
 ## Only buttons
-
+![A sketch of a diagram](img/buttons.png "Buttuns Diagram")
 ## Only sensor
 
 ## Only digit pins
